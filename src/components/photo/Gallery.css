@@ -1,0 +1,119 @@
+.galleryContainer {
+  padding: 5rem 1rem;
+}
+.galleryHeading {
+  text-align: center;
+}
+.project-grid {
+  display: grid;
+  grid-template-areas:
+    "eth eth alphabet"
+    "eth eth traveler"
+    "astro cube traveler"
+    "cup insta foam"
+    "cup insta foam";
+  grid-gap: 5px;
+  width: 100%;
+}
+
+#eth {
+  grid-area: eth;
+}
+#alphabet {
+  grid-area: alphabet;
+}
+#traveler {
+  grid-area: traveler;
+}
+#astro {
+  grid-area: astro;
+}
+#cube {
+  grid-area: cube;
+}
+#cup {
+  grid-area: cup;
+}
+#insta {
+  grid-area: insta;
+}
+#foam {
+  grid-area: foam;
+}
+
+.project {
+  /* width: 600px; */
+  position: relative;
+}
+
+.project img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.project .overlay {
+  background-color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.project .overlay:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.overlay.white {
+  color: white;
+}
+
+.footer {
+  text-align: center;
+  padding: 64px;
+}
+
+@media only screen and (max-width: 1100px) {
+  .container {
+    max-width: 100%;
+  }
+  .project-grid {
+    max-width: 100%;
+    grid-template-areas:
+      "eth eth"
+      "alphabet traveler"
+      "astro cube"
+      "insta insta"
+      "cup foam"
+      "dimensional dimensional";
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .footer {
+    font-size: 14px;
+    padding: 32px;
+  }
+  .project-grid {
+    grid-template-areas:
+      "eth eth"
+      "alphabet alphabet"
+      "traveler traveler"
+      "astro cube"
+      "insta insta"
+      "cup cup"
+      "foam foam"
+      "dimensional dimensional";
+  }
+}

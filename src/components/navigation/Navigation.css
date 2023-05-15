@@ -1,0 +1,133 @@
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  background-color: var(--main-bg-color);
+}
+.left {
+  margin-left: 1rem;
+}
+.left img {
+  width: 5rem;
+  height: 4rem;
+}
+.right {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.right a img {
+  width: 2.5rem;
+  height: 2rem;
+}
+.right a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+}
+.right a:hover {
+  text-decoration: underline;
+}
+.hamburger {
+  display: none;
+}
+.bar1,
+.bar2,
+.bar3 {
+  background-color: black;
+  height: 4px;
+  margin-bottom: 0.5rem;
+  border-radius: 1rem;
+  width: 4rem;
+}
+.animateBar1 {
+  animation: flipBar1 0.5s;
+  animation-fill-mode: forwards;
+}
+.animateBar2 {
+  animation: fadeBar2 0.5s;
+  animation-fill-mode: forwards;
+}
+.animateBar3 {
+  animation: flipBar3 0.5s;
+  animation-fill-mode: forwards;
+}
+/* mobileNav */
+.mobileNav {
+  margin-top: 5rem;
+  width: 7rem;
+  background-color: var(--main-bg-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: -16rem;
+  transition: transform 0.5s;
+}
+.mobileNav img {
+  width: 2rem;
+  height: 2rem;
+}
+.mobileNav a {
+  text-decoration: none;
+  margin: 1.6rem;
+  color: black;
+  font-size: 1.5rem;
+}
+.mobileNav a:hover {
+  text-decoration: underline;
+}
+.openDrawer {
+  transform: translate(-16rem);
+}
+@media only screen and (max-width: 768px) {
+  .nav-bar {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    padding: 0.7rem 2rem;
+  }
+  .right {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+/* keyframe animation */
+@keyframes flipBar1 {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(45deg) translate(4px, 10px);
+  }
+}
+@keyframes fadeBar2 {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@keyframes flipBar3 {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-45deg) translate(4px, -10px);
+  }
+}

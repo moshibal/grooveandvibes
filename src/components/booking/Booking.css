@@ -1,0 +1,65 @@
+form {
+  padding: 5rem 10rem 5rem;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+}
+form h2 {
+  text-align: center;
+}
+form div {
+  margin-bottom: 1rem;
+}
+form div label {
+  font-weight: 700;
+  font-size: 2rem;
+  display: block;
+}
+form div input,
+textarea {
+  font-size: 2rem;
+  font-weight: 500;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 80%;
+}
+.error {
+  display: block;
+  color: orangered;
+  font-size: var(--h4-size);
+}
+.success {
+  display: block;
+  color: greenyellow;
+  font-size: var(--h4-size);
+}
+form .form-button {
+  width: 20%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  transition: transform 1s;
+}
+.form-button:hover {
+  transform: scale(1.1);
+  background-color: var(--purple-1);
+}
+@media only screen and (max-width: 1100px) {
+  form {
+    padding: 5rem;
+  }
+  form div input,
+  textarea {
+    width: 100%;
+  }
+  form .form-button {
+    width: 30%;
+  }
+}
+@media only screen and (max-width: 678px) {
+  form {
+    padding: 1rem;
+  }
+  form .form-button {
+    width: 40%;
+  }
+}
