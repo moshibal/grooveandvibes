@@ -11,7 +11,7 @@ const Navigation = () => {
         </div>
         <div className="right">
           <a href="#booking">Booking</a>
-          <a href="tel:0433756731">Contact Us</a>
+          <a href="tel:0433756731">Contact</a>
           <a href="#dribble">
             <img src="/images/tiktok.png" alt="tiktok" />
           </a>
@@ -26,13 +26,21 @@ const Navigation = () => {
         </div>
       </header>
       <nav className="mobileNav">
-        <a href="tel:0433756731">Contact Us</a>
+        <a href="tel:0433756731">Contact</a>
         <a href="#booking">Booking</a>
-        <a href="#dribble">
-          <img src="/images/tiktok.png" alt="drible" />
+        <a
+          href="https://www.tiktok.com/@grooveandvibes"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src="/images/tiktok.png" alt="tiktok" />
         </a>
-        <a href="#insta">
-          <img src="/images/insta_icon.png" alt="insta" />
+        <a
+          href="https://www.instagram.com/groove_and_vibes/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src="/images/insta_icon.png" alt="instagram" />
         </a>
       </nav>
     </>
