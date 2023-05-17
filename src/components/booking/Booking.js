@@ -9,7 +9,7 @@ const Booking = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMassage] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
   const [formError, setFormError] = useState({});
   //cleaning the component after the response message
   useEffect(() => {
@@ -51,10 +51,18 @@ const Booking = () => {
 
     if (Object.keys(errors).length === 0) {
       // If there are no errors, submit the form
-      const bookingObject = { name, email, phone, date, message };
+
+      const bookingObject = {
+        name,
+        email,
+        phone,
+        date,
+        message,
+      };
 
       const response = await sendHttp({
         url: "https://api.darwichmeats.com/api/bookings",
+        // url: "http://localhost:4000/api/bookings",
         body: bookingObject,
       });
       setResponse(response.data.message);
