@@ -25,12 +25,12 @@ textarea {
 .error {
   display: block;
   color: orangered;
-  font-size: var(--h4-size);
+  font-size: var(--h3-size);
 }
 .success {
   display: block;
-  color: greenyellow;
-  font-size: var(--h4-size);
+  color: green;
+  font-size: var(--h3-size);
 }
 form .form-button {
   width: 20%;

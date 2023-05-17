@@ -14,10 +14,9 @@ const useHttp = () => {
     } catch (error) {
       setIsLoading(false);
       setError(error.response.data.message || "something went wrong.");
-      throw error;
     }
   };
-  return { isLoading, error, sendHttp };
+  return { isLoading, error, sendHttp, setError };
 };
 
 export default useHttp;

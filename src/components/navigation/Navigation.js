@@ -12,11 +12,19 @@ const Navigation = () => {
         <div className="right">
           <a href="#booking">Booking</a>
           <a href="tel:0433756731">Contact</a>
-          <a href="#dribble">
+          <a
+            href="https://www.tiktok.com/@grooveandvibes"
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src="/images/tiktok.png" alt="tiktok" />
           </a>
-          <a href="#insta">
-            <img src="/images/insta_icon.png" alt="insta" />
+          <a
+            href="https://www.instagram.com/groove_and_vibes/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src="/images/insta_icon.png" alt="instagram" />
           </a>
         </div>
         <div className="hamburger" onClick={toggleHamburger}>

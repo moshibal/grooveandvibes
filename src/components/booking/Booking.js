@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useHttp from "../../hooks/useHttp";
 import "./Booking.css";
 const minDate = new Date().toISOString().split("T")[0];
 const Booking = () => {
-  const { isLoading, error, sendHttp } = useHttp();
+  const { isLoading, error, sendHttp, setError } = useHttp();
   const [response, setResponse] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,6 +11,17 @@ const Booking = () => {
   const [message, setMassage] = useState("");
   const [date, setDate] = useState("");
   const [formError, setFormError] = useState({});
+  //cleaning the component after the response message
+  useEffect(() => {
+    setTimeout(() => {
+      if (error) {
+        setError(null);
+      }
+      if (response) {
+        setResponse(null);
+      }
+    }, 5000);
+  }, [response, error, setError]);
   const bookingHandler = async (e) => {
     e.preventDefault();
     // Perform input validation checks
@@ -41,20 +52,17 @@ const Booking = () => {
     if (Object.keys(errors).length === 0) {
       // If there are no errors, submit the form
       const bookingObject = { name, email, phone, date, message };
-      try {
-        const response = await sendHttp({
-          url: "http://localhost:4000/api/bookings",
-          body: bookingObject,
-        });
-        setResponse(response.data.message);
-        setName("");
-        setDate("");
-        setEmail("");
-        setMassage("");
-        setPhone("");
-      } catch (error) {
-        console.error(error);
-      }
+
+      const response = await sendHttp({
+        url: "https://api.darwichmeats.com/api/bookings",
+        body: bookingObject,
+      });
+      setResponse(response.data.message);
+      setName("");
+      setDate("");
+      setEmail("");
+      setMassage("");
+      setPhone("");
     } else {
       // If there are errors, display them
       setFormError(errors);
