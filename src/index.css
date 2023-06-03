@@ -61,3 +61,13 @@ a {
 a:hover {
   color: var(--purple-2);
 }
+.error {
+  color: orangered;
+}
+.success {
+  color: yellowgreen;
+}
+.nav-dropdown {
+  font-size: 1.5rem;
+  padding: 1rem;
+}

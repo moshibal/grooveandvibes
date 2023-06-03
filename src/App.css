@@ -1,0 +1,7 @@
+/* basic css for custom components */
+/* for button */
+.appButton {
+  padding: 0.5rem;
+  margin-right: 1rem;
+  border-radius: 0.5rem;
+}

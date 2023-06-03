@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navigation.css";
 import { toggleHamburger } from "./index.js";
+import { useSelector } from "react-redux";
 
 const Navigation = () => {
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.login);
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleSelectOption = (e) => {
+    setSelectedOption(e.target.value);
+  };
+  useEffect(() => {
+    if (selectedOption === "register") {
+      // Logic for navigating to the Register page
+      navigate("/registration");
+    } else if (selectedOption === "bookingList") {
+      // Logic for navigating to the Booking List page
+      navigate("/bookings");
+    } else if (selectedOption === "studentList") {
+      // Logic for navigating to the Student List page
+      navigate("/studentList");
+    }
+  }, [navigate, selectedOption]);
+
   return (
     <>
       <header className="nav-bar">
@@ -10,22 +32,36 @@ const Navigation = () => {
           <img src="/images/logo.png" alt="logo"></img>
         </div>
         <div className="right">
-          <a href="#booking">Booking</a>
-          <a href="tel:0433756731">Contact</a>
-          <a
+          <Link href="#booking">Booking</Link>
+          <Link href="tel:0433756731">Contact</Link>
+          {userInfo?.data?.email === "manial@gmail.com" ? (
+            <select
+              className="nav-dropdown"
+              value={selectedOption}
+              onChange={handleSelectOption}
+            >
+              <option value="">Select an option</option>
+              <option value="register">Register</option>
+              <option value="bookingList">Booking-List</option>
+              <option value="studentList">Student-List</option>
+            </select>
+          ) : (
+            <Link to="/login">Admin</Link>
+          )}
+          <Link
             href="https://www.tiktok.com/@grooveandvibes"
             target="_blank"
             rel="noreferrer"
           >
             <img src="/images/tiktok.png" alt="tiktok" />
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://www.instagram.com/groove_and_vibes/"
             target="_blank"
             rel="noreferrer"
           >
             <img src="/images/insta_icon.png" alt="instagram" />
-          </a>
+          </Link>
         </div>
         <div className="hamburger" onClick={toggleHamburger}>
           <div className="bar1"></div>
@@ -34,22 +70,23 @@ const Navigation = () => {
         </div>
       </header>
       <nav className="mobileNav">
-        <a href="tel:0433756731">Contact</a>
-        <a href="#booking">Booking</a>
-        <a
+        <Link href="tel:0433756731">Contact</Link>
+        <Link href="#booking">Booking</Link>
+        <Link to="/login">Admin</Link>
+        <Link
           href="https://www.tiktok.com/@grooveandvibes"
           target="_blank"
           rel="noreferrer"
         >
           <img src="/images/tiktok.png" alt="tiktok" />
-        </a>
-        <a
+        </Link>
+        <Link
           href="https://www.instagram.com/groove_and_vibes/"
           target="_blank"
           rel="noreferrer"
         >
           <img src="/images/insta_icon.png" alt="instagram" />
-        </a>
+        </Link>
       </nav>
     </>
   );

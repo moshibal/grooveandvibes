@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import "./Wrapper.css";
 const Wrapper = (props) => {
   return (
     <>
@@ -11,7 +11,8 @@ const Wrapper = (props) => {
           </Link>
         </div>
       </header>
-      {props.children}
+      <div className="childrenDiv">{props.children}</div>
+
       <div>
         <div className="copyright">
           <span>copyright</span>
