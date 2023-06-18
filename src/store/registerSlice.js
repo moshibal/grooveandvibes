@@ -8,9 +8,9 @@ const registerSlice = createSlice({
     registerRequest(state) {
       state.loading = true;
     },
-    registerSuccess(state) {
+    registerSuccess(state, action) {
       state.loading = false;
-      state.success = true;
+      state.success = action.payload;
     },
     registerFail(state, action) {
       state.loading = false;
@@ -35,9 +35,13 @@ export const register = (registerObj) => {
         registerObj
       );
 
-      dispatch(registerSuccess());
+      dispatch(registerSuccess(true));
     } catch (error) {
-      dispatch(registerFail({ fail: "register failed." }));
+      dispatch(
+        registerFail({
+          fail: error.response.data.message || "register failed.",
+        })
+      );
     }
   };
 };

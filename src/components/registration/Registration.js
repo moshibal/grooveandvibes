@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../store/registerSlice";
+import { registerSuccess, registerFail } from "../../store/registerSlice";
 import "../login/Login.css";
 
 const RegistrationForm = () => {
@@ -69,13 +70,15 @@ const RegistrationForm = () => {
     let timeoutId;
     if (registrationSucess) {
       timeoutId = setTimeout(() => {
+        dispatch(registerSuccess(false));
+        dispatch(registerFail(""));
         navigate("/studentList");
       }, 2000);
     }
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [registrationSucess, navigate]);
+  }, [registrationSucess, navigate, dispatch]);
   return (
     <form onSubmit={handleSubmit} className="form">
       <div className="form-div">

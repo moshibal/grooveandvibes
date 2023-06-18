@@ -36,7 +36,11 @@ export const fetchStudents = () => {
 
       dispatch(studentSuccess({ data }));
     } catch (error) {
-      dispatch(studentFail({ fail: "register failed." }));
+      dispatch(
+        studentFail({
+          fail: error.response.data.message || "something went wrong",
+        })
+      );
     }
   };
 };
