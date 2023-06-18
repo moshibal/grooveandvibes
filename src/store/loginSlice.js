@@ -37,7 +37,7 @@ export const login = (email, password) => {
         },
       };
       const { data } = await axios.post(
-        "https://api.darwichmeats.com/api/users/login",
+        "https://darwich.onrender.com/api/users/login",
         {
           email,
           password,
@@ -59,7 +59,7 @@ export const logout = () => {
   return async (dispatch, getState) => {
     try {
       const res = await axios.get(
-        "https://api.darwichmeats.com/api/users/logout"
+        "https://darwich.onrender.com/api/users/logout"
       );
       if (res.status === 200) {
         dispatch(deleteUser());

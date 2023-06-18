@@ -61,10 +61,10 @@ const Booking = () => {
       };
 
       const response = await sendHttp({
-        url: "https://api.darwichmeats.com/api/bookings",
-        // url: "http://localhost:4000/api/bookings",
+        url: "https://darwich.onrender.com/api/bookings",
         body: bookingObject,
       });
+      console.log(response);
       setResponse(response.data.message);
       setName("");
       setDate("");

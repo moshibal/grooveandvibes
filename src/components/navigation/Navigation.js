@@ -1,30 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navigation.css";
 import { toggleHamburger } from "./index.js";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Navigation = () => {
-  // const navigate = useNavigate();
-  // const { userInfo } = useSelector((state) => state.login);
-  // const [selectedOption, setSelectedOption] = useState("");
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.login);
+  const [selectedOption, setSelectedOption] = useState("");
 
-  // const handleSelectOption = (e) => {
-  //   setSelectedOption(e.target.value);
-  // };
-  // useEffect(() => {
-  //   if (selectedOption === "register") {
-  //     // Logic for navigating to the Register page
-  //     navigate("/registration");
-  //   } else if (selectedOption === "bookingList") {
-  //     // Logic for navigating to the Booking List page
-  //     navigate("/bookings");
-  //   } else if (selectedOption === "studentList") {
-  //     // Logic for navigating to the Student List page
-  //     navigate("/studentList");
-  //   }
-  // }, [navigate, selectedOption]);
-
+  const handleSelectOption = (e) => {
+    setSelectedOption(e.target.value);
+  };
+  useEffect(() => {
+    if (selectedOption === "register") {
+      // Logic for navigating to the Register page
+      navigate("/registration");
+    } else if (selectedOption === "bookingList") {
+      // Logic for navigating to the Booking List page
+      navigate("/bookingList");
+    } else if (selectedOption === "studentList") {
+      // Logic for navigating to the Student List page
+      navigate("/studentList");
+    }
+  }, [navigate, selectedOption]);
+  //handelers
+  const handleScrollToBooking = () => {
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+        duration: 3000,
+      });
+    }
+  };
   return (
     <>
       <header className="nav-bar">
@@ -32,9 +43,11 @@ const Navigation = () => {
           <img src="/images/logo.png" alt="logo"></img>
         </div>
         <div className="right">
-          <Link href="#booking">Booking</Link>
-          <Link href="tel:0433756731">Contact</Link>
-          {/* {userInfo?.data?.email === "manial@gmail.com" ? (
+          <Link to="#" onClick={handleScrollToBooking}>
+            Booking
+          </Link>
+          <a href="tel:0433756731">Contact</a>
+          {userInfo?.data?.isAdmin ? (
             <select
               className="nav-dropdown"
               value={selectedOption}
@@ -47,16 +60,16 @@ const Navigation = () => {
             </select>
           ) : (
             <Link to="/login">Admin</Link>
-          )} */}
+          )}
           <Link
-            href="https://www.tiktok.com/@grooveandvibes"
+            to="https://www.tiktok.com/@grooveandvibes"
             target="_blank"
             rel="noreferrer"
           >
             <img src="/images/tiktok.png" alt="tiktok" />
           </Link>
           <Link
-            href="https://www.instagram.com/groove_and_vibes/"
+            to="https://www.instagram.com/groove_and_vibes/"
             target="_blank"
             rel="noreferrer"
           >
@@ -70,18 +83,31 @@ const Navigation = () => {
         </div>
       </header>
       <nav className="mobileNav">
-        <Link href="tel:0433756731">Contact</Link>
+        <a href="tel:0433756731">Contact</a>
         <Link href="#booking">Booking</Link>
-        {/* <Link to="/login">Admin</Link> */}
+        {userInfo?.data?.isAdmin ? (
+          <select
+            className="nav-dropdown"
+            value={selectedOption}
+            onChange={handleSelectOption}
+          >
+            <option value="">Go To</option>
+            <option value="register">Register</option>
+            <option value="bookingList">Bookings</option>
+            <option value="studentList">Students</option>
+          </select>
+        ) : (
+          <Link to="/login">Admin</Link>
+        )}
         <Link
-          href="https://www.tiktok.com/@grooveandvibes"
+          to="https://www.tiktok.com/@grooveandvibes"
           target="_blank"
           rel="noreferrer"
         >
           <img src="/images/tiktok.png" alt="tiktok" />
         </Link>
         <Link
-          href="https://www.instagram.com/groove_and_vibes/"
+          to="https://www.instagram.com/groove_and_vibes/"
           target="_blank"
           rel="noreferrer"
         >

@@ -31,7 +31,7 @@ export const fetchStudents = () => {
       axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
 
       const { data } = await axios.get(
-        "https://api.darwichmeats.com/api/vibeRigistration"
+        "https://darwich.onrender.com/api/vibeRigistration"
       );
 
       dispatch(studentSuccess({ data }));
@@ -42,23 +42,27 @@ export const fetchStudents = () => {
 };
 const updateStudentSlice = createSlice({
   name: "updateStudentSlice",
-  initialState: { success: "", loading: false, error: "" },
+  initialState: { success: "", update: false, loading: false, error: "" },
   reducers: {
     updateStudentRequest(state) {
       state.loading = true;
+      state.update = false;
     },
     updateStudentSuccess(state, action) {
       state.loading = false;
+      state.update = true;
       state.success = action.payload.success;
     },
     updateStudentFail(state, action) {
       state.loading = false;
+      state.update = false;
       state.error = action.payload.fail;
     },
   },
 });
 const { updateStudentRequest, updateStudentSuccess, updateStudentFail } =
   updateStudentSlice.actions;
+
 export const updateAttendance = (updateobject) => {
   return async (dispatch, getState) => {
     try {
@@ -69,7 +73,7 @@ export const updateAttendance = (updateobject) => {
       axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
 
       const { data } = await axios.patch(
-        "https://api.darwichmeats.com/api/vibeRigistration/attendance",
+        "https://darwich.onrender.com/api/vibeRigistration/attendance",
         updateobject
       );
 
@@ -77,7 +81,7 @@ export const updateAttendance = (updateobject) => {
     } catch (error) {
       dispatch(
         updateStudentFail({
-          fail: error.data.message || "something went wrong",
+          fail: error.response.data.message || "something went wrong",
         })
       );
     }
@@ -98,7 +102,7 @@ export const deleteStudent = (id) => {
         },
       };
       const { data } = await axios.delete(
-        `https://api.darwichmeats.com/api/vibeRigistration/attendance/${id}`,
+        `https://darwich.onrender.com/api/vibeRigistration/${id}`,
 
         config
       );
@@ -107,11 +111,11 @@ export const deleteStudent = (id) => {
     } catch (error) {
       dispatch(
         updateStudentFail({
-          fail: error.data.message || "something went wrong",
+          fail: error.response.data.message || "something went wrong",
         })
       );
     }
   };
 };
-
+export const updateStudentReducer = updateStudentSlice.reducer;
 export default studentListSlice.reducer;

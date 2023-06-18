@@ -70,7 +70,7 @@ const RegistrationForm = () => {
     if (registrationSucess) {
       timeoutId = setTimeout(() => {
         navigate("/studentList");
-      }, 3000);
+      }, 2000);
     }
     return () => {
       clearTimeout(timeoutId);

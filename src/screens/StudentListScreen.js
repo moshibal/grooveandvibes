@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Wrapper from "../utilities/wrapper";
-import { fetchStudents } from "../store/studentListSlice";
+import {
+  deleteStudent,
+  fetchStudents,
+  updateAttendance,
+} from "../store/studentListSlice";
 
 import Loader from "../utilities/Loader";
 import Message from "../utilities/Message";
@@ -13,21 +17,38 @@ const StudentScreen = () => {
   const { students, loading, error } = useSelector(
     (state) => state.studentList
   );
+  const { update, error: updateStudentError } = useSelector(
+    (state) => state.updateStudentList
+  );
   const { userInfo } = useSelector((state) => state.login);
+  //EFFECTS
   useEffect(() => {
-    if (userInfo?.data?.email !== "manial@gmail.com") {
+    if (!userInfo?.data?.isAdmin) {
       navigate("/");
+    } else if (update) {
+      dispatch(fetchStudents());
     } else {
       dispatch(fetchStudents());
     }
-  }, [userInfo, navigate, dispatch]);
+  }, [userInfo, update, navigate, dispatch]);
 
+  //handelers
+  const addAttendenceHandler = (studenID) => {
+    dispatch(updateAttendance({ _id: studenID }));
+  };
+  const resetAttendenceHandler = (studenID) => {
+    dispatch(updateAttendance({ _id: studenID, reset: 0 }));
+  };
+  const deleteStudentHandler = (studenID) => {
+    dispatch(deleteStudent(studenID));
+  };
   return (
     <Wrapper>
       <div className="row">
         <div className="col text-end appButton">
           <Link to="/registration">Register Student</Link>
         </div>
+        {updateStudentError && <p>{updateStudentError}</p>}
       </div>
       {loading ? (
         <Loader />
@@ -44,6 +65,7 @@ const StudentScreen = () => {
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Attendance</th>
+                <th scope="col">Classes</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -56,12 +78,34 @@ const StudentScreen = () => {
                   <td>{student.email}</td>
                   <td>{student.phone}</td>
                   <td>{student.attendance}</td>
+                  <td>{student.selectedClass}</td>
                   <td>
-                    <button className="appButton">Add day</button>
+                    <button
+                      className="appButton"
+                      onClick={() => {
+                        addAttendenceHandler(student._id);
+                      }}
+                    >
+                      Add day
+                    </button>
                   </td>
                   <td>
-                    <button className="appButton">Reset day</button>
-                    <button className="appButton">Delete Student</button>
+                    <button
+                      className="appButton"
+                      onClick={() => {
+                        resetAttendenceHandler(student._id);
+                      }}
+                    >
+                      Reset day
+                    </button>
+                    <button
+                      className="appButton"
+                      onClick={() => {
+                        deleteStudentHandler(student._id);
+                      }}
+                    >
+                      Delete Student
+                    </button>
                   </td>
                 </tr>
               ))}

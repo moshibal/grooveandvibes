@@ -104,6 +104,12 @@
     justify-content: center;
     align-items: center;
   }
+  .nav-dropdown {
+    max-width: 100%;
+  }
+  .nav-dropdown:focus {
+    transform: translateX(-3rem);
+  }
 }
 /* keyframe animation */
 @keyframes flipBar1 {

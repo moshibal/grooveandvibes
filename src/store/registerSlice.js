@@ -22,18 +22,17 @@ const registerSlice = createSlice({
 export const { registerRequest, registerSuccess, registerFail } =
   registerSlice.actions;
 export const register = (registerObj) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(registerRequest());
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+      // Set the authentication token in Axios
+
+      const { token } = getState().login.userInfo.data;
+      axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
+
       await axios.post(
-        "http://localhost:4000/api/vibeRigistration",
-        registerObj,
-        config
+        "https://darwich.onrender.com/api/vibeRigistration",
+        registerObj
       );
 
       dispatch(registerSuccess());
