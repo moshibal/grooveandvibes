@@ -84,7 +84,9 @@ const Navigation = () => {
       </header>
       <nav className="mobileNav">
         <a href="tel:0433756731">Contact</a>
-        <Link to="#booking">Booking</Link>
+        <Link to="#" onClick={handleScrollToBooking}>
+          Booking
+        </Link>
         {userInfo?.data?.isAdmin ? (
           <select
             className="nav-dropdown"
