@@ -20,7 +20,7 @@ const Booking = () => {
       if (response) {
         setResponse(null);
       }
-    }, 5000);
+    }, 3000);
   }, [response, error, setError]);
   const bookingHandler = async (e) => {
     e.preventDefault();

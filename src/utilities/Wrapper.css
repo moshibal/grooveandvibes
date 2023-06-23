@@ -1,4 +1,4 @@
 .childrenDiv {
   padding: 5rem;
-  height: 95vh;
+  min-height: 95vh;
 }

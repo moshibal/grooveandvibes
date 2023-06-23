@@ -12,18 +12,30 @@ function Form() {
   const [emailCheck, setEmailCheck] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userInfo, message } = useSelector((state) => state.login);
+  //global state
+  const { userInfo, errorLoginMessage } = useSelector((state) => state.login);
+  //effects
   useEffect(() => {
+    let timeoutId = null;
     if (userInfo && userInfo?.data) {
-      navigate("/");
+      timeoutId = setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [navigate, userInfo]);
+
+  //login handeler
   const loginHandler = (e) => {
     e.preventDefault();
     if (email.length > 0 && email.includes("@")) {
       dispatch(login(email, password));
     } else {
       setEmailCheck("Please type correct email address.");
+      setEmail("");
+      setPassword("");
     }
   };
   return (
@@ -31,7 +43,14 @@ function Form() {
       <div className="form-div">
         <h2>Admin Login Only.</h2>
 
-        {message && <Message variant="danger">{message}</Message>}
+        {errorLoginMessage && (
+          <Message variant="error">{errorLoginMessage}</Message>
+        )}
+        {userInfo?.data && (
+          <Message variant="success">
+            <p>Successfully, Loged In</p>
+          </Message>
+        )}
         <div className="control-group">
           <label htmlFor="email">Email Address</label>
           <input

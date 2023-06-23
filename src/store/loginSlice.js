@@ -8,7 +8,7 @@ const userSlice = createSlice({
   initialState: {
     userInfo: userInfoLocalStorage,
     loading: false,
-    errorLoginMessage: "",
+    errorLoginMessage: null,
   },
   reducers: {
     loginRequest(state) {
@@ -17,13 +17,15 @@ const userSlice = createSlice({
     loginSuccess(state, action) {
       state.loading = false;
       state.userInfo = action.payload.userData;
+      state.errorLoginMessage = null;
     },
     loginFail(state, action) {
       state.loading = false;
       state.errorLoginMessage = action.payload.message;
     },
-    deleteUser(state) {
+    deleteUser(state, action) {
       state.userInfo = {};
+      state.errorLoginMessage = action.payload.message;
     },
   },
 });

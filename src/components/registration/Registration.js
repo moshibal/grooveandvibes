@@ -46,7 +46,6 @@ const RegistrationForm = () => {
       errors.selectedClass = "please select the available class group";
     }
     if (Object.keys(errors).length > 0) {
-      console.log("hey");
       setErrors(errors);
       return;
     }
