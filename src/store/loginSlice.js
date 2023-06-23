@@ -5,7 +5,11 @@ let userInfoLocalStorage = localStorage.getItem("userInformation")
   : {};
 const userSlice = createSlice({
   name: "userInfo",
-  initialState: { userInfo: userInfoLocalStorage, loading: false, message: "" },
+  initialState: {
+    userInfo: userInfoLocalStorage,
+    loading: false,
+    errorLoginMessage: "",
+  },
   reducers: {
     loginRequest(state) {
       state.loading = true;
@@ -16,8 +20,7 @@ const userSlice = createSlice({
     },
     loginFail(state, action) {
       state.loading = false;
-
-      state.message = action.payload.message;
+      state.errorLoginMessage = action.payload.message;
     },
     deleteUser(state) {
       state.userInfo = {};
@@ -51,7 +54,11 @@ export const login = (email, password) => {
         JSON.stringify(getState().login.userInfo)
       );
     } catch (error) {
-      dispatch(loginFail({ message: "user login failed" }));
+      dispatch(
+        loginFail({
+          message: error.response.data.message || "user login failed",
+        })
+      );
     }
   };
 };
@@ -69,7 +76,11 @@ export const logout = () => {
         );
       }
     } catch (error) {
-      console.log(error.response.data);
+      dispatch(
+        deleteUser({
+          message: error.response.data.message || "Something went wrong.",
+        })
+      );
     }
   };
 };
