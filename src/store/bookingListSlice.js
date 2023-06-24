@@ -6,7 +6,6 @@ const bookingSlice = createSlice({
     loading: false,
     error: null,
     deleteMessage: null,
-    deleteErrorMessage: null,
   },
   name: "BookingSlice",
   reducers: {

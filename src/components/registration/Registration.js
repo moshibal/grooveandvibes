@@ -6,20 +6,22 @@ import { registerSuccess, registerFail } from "../../store/registerSlice";
 import "../login/Login.css";
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   //component state
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [selectedClass, setSelectedClass] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState("");
   const [errors, setErrors] = useState({});
 
-  //redux subcribtion
+  //global state
   const { success: registrationSucess, error: registrationError } = useSelector(
     (state) => state.register
   );
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform registration logic with form data
@@ -45,6 +47,9 @@ const RegistrationForm = () => {
     if (!selectedClass) {
       errors.selectedClass = "please select the available class group";
     }
+    if (!selectedGroup) {
+      errors.selectedClass = "please select the group";
+    }
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
       return;
@@ -55,6 +60,7 @@ const RegistrationForm = () => {
       phone,
       address,
       selectedClass,
+      selectedGroup,
     };
 
     dispatch(register(registrationObj));
@@ -64,6 +70,7 @@ const RegistrationForm = () => {
     setPhone("");
     setAddress("");
     setSelectedClass("");
+    setSelectedGroup("");
   };
   useEffect(() => {
     let timeoutId;
@@ -145,6 +152,23 @@ const RegistrationForm = () => {
           </select>
           {errors.selectedClass && (
             <p className="error">{errors.selectedClass}</p>
+          )}
+        </div>
+        <div className="control-group">
+          <label htmlFor="group">Group:</label>
+          <select
+            id="group"
+            value={selectedGroup}
+            onChange={(e) => setSelectedGroup(e.target.value)}
+            required
+            className="nav-dropdown"
+          >
+            <option value="">Select group</option>
+            <option value="kid">Kids</option>
+            <option value="adult">Adults</option>
+          </select>
+          {errors.selectedGroup && (
+            <p className="error">{errors.selectedGroup}</p>
           )}
         </div>
         <button type="submit" className="formButton">

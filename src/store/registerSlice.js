@@ -11,6 +11,7 @@ const registerSlice = createSlice({
     registerSuccess(state, action) {
       state.loading = false;
       state.success = action.payload;
+      state.error = "";
     },
     registerFail(state, action) {
       state.loading = false;

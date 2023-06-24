@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 const StudentScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  //global states
   const { students, loading, error } = useSelector(
     (state) => state.studentList
   );
@@ -25,13 +26,17 @@ const StudentScreen = () => {
   useEffect(() => {
     if (!userInfo?.data?.isAdmin) {
       navigate("/");
-    } else if (update) {
-      dispatch(fetchStudents());
     } else {
       dispatch(fetchStudents());
     }
-  }, [userInfo, update, navigate, dispatch]);
-
+  }, [userInfo, navigate, dispatch]);
+  useEffect(() => {
+    if (!userInfo?.data?.isAdmin) {
+      navigate("/");
+    } else if (update) {
+      dispatch(fetchStudents());
+    }
+  }, [update, userInfo, navigate, dispatch]);
   //handelers
   const addAttendenceHandler = (studenID) => {
     dispatch(updateAttendance({ _id: studenID }));
@@ -46,14 +51,24 @@ const StudentScreen = () => {
     <Wrapper>
       <div className="row">
         <div className="col text-end appButton">
-          <Link to="/registration">Register Student</Link>
+          <Link
+            to="/registration"
+            style={{
+              border: "1px solid black",
+              padding: "1rem",
+              textTransform: "uppercase",
+              fontWeight: "bold",
+            }}
+          >
+            Register Student
+          </Link>
         </div>
         {updateStudentError && <p>{updateStudentError}</p>}
       </div>
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message>{error}</Message>
+        <Message variant="error">{error}</Message>
       ) : (
         <div className="table-responsive">
           <table className="table table-striped">

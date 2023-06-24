@@ -10,16 +10,21 @@ import { Link } from "react-router-dom";
 const BookingScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { bookings, loading, error, deleteMessage, deleteErrorMessage } =
-    useSelector((state) => state.bookingList);
+  //global states
+  const { bookings, loading, error, deleteMessage } = useSelector(
+    (state) => state.bookingList
+  );
   const { userInfo } = useSelector((state) => state.login);
+  // effects
   useEffect(() => {
     if (!userInfo?.data?.isAdmin) {
       navigate("/");
-    } else {
+    } else if (deleteMessage || userInfo?.data?.isAdmin) {
       dispatch(fetchBookings());
     }
-  }, [userInfo, navigate, dispatch]);
+  }, [userInfo, navigate, dispatch, deleteMessage]);
+
+  //handlers
   const handlePhoneCall = (phone) => {
     window.location.href = `tel:${phone}`;
   };
@@ -30,7 +35,17 @@ const BookingScreen = () => {
     <Wrapper>
       <div className="row">
         <div className="col text-end appButton">
-          <Link to="/registration">Register Student</Link>
+          <Link
+            to="/registration"
+            style={{
+              border: "1px solid black",
+              padding: "1rem",
+              textTransform: "uppercase",
+              fontWeight: "bold",
+            }}
+          >
+            Register Student
+          </Link>
         </div>
       </div>
       {loading ? (
@@ -39,8 +54,6 @@ const BookingScreen = () => {
         <Message>{error}</Message>
       ) : (
         <div className="table-responsive">
-          {deleteMessage && <p>{deleteMessage}</p>}
-          {deleteErrorMessage && <p>{deleteErrorMessage}</p>}
           <table className="table table-striped">
             <caption>List of Bookings</caption>
             <thead>
