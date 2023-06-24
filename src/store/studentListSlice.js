@@ -11,6 +11,7 @@ const studentListSlice = createSlice({
     studentSuccess(state, action) {
       state.loading = false;
       state.students = action.payload.data.students;
+      state.error = "";
     },
     studentFail(state, action) {
       state.loading = false;
@@ -21,9 +22,11 @@ const studentListSlice = createSlice({
 
 const { studentRequest, studentSuccess, studentFail } =
   studentListSlice.actions;
-export const fetchStudents = () => {
+export const fetchStudents = (filterObject) => {
   return async (dispatch, getState) => {
     try {
+      const group = filterObject.filterStudent;
+
       dispatch(studentRequest());
       // Set the authentication token in Axios
 
@@ -31,7 +34,7 @@ export const fetchStudents = () => {
       axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
 
       const { data } = await axios.get(
-        "https://darwich.onrender.com/api/vibeRigistration"
+        `https://darwich.onrender.com/api/vibeRigistration?selectedGroup=${group}`
       );
 
       dispatch(studentSuccess({ data }));

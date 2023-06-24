@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Wrapper from "../utilities/wrapper";
@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 const StudentScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [filterStudent, setFilterStudent] = useState("");
+
   //global states
   const { students, loading, error } = useSelector(
     (state) => state.studentList
@@ -23,20 +25,22 @@ const StudentScreen = () => {
   );
   const { userInfo } = useSelector((state) => state.login);
   //EFFECTS
+
   useEffect(() => {
     if (!userInfo?.data?.isAdmin) {
       navigate("/");
     } else {
-      dispatch(fetchStudents());
+      dispatch(fetchStudents({ filterStudent }));
     }
-  }, [userInfo, navigate, dispatch]);
+  }, [userInfo, navigate, dispatch, filterStudent]);
   useEffect(() => {
     if (!userInfo?.data?.isAdmin) {
       navigate("/");
     } else if (update) {
-      dispatch(fetchStudents());
+      dispatch(fetchStudents({ filterStudent }));
     }
-  }, [update, userInfo, navigate, dispatch]);
+  }, [update, userInfo, filterStudent, navigate, dispatch]);
+
   //handelers
   const addAttendenceHandler = (studenID) => {
     dispatch(updateAttendance({ _id: studenID }));
@@ -63,6 +67,21 @@ const StudentScreen = () => {
             Register Student
           </Link>
         </div>
+        <div className="control-group">
+          <label htmlFor="filer">Filter BY:</label>
+          <select
+            id="filter"
+            required
+            className="nav-dropdown"
+            onChange={(e) => {
+              setFilterStudent(e.target.value);
+            }}
+          >
+            <option value="">All Students</option>
+            <option value="kid">Kids</option>
+            <option value="adult">Adults</option>
+          </select>
+        </div>
         {updateStudentError && <p>{updateStudentError}</p>}
       </div>
       {loading ? (
@@ -75,12 +94,13 @@ const StudentScreen = () => {
             <caption>List of students</caption>
             <thead>
               <tr className="fs-4">
-                <th scope="col">Id</th>
+                {/* <th scope="col">Id</th> */}
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Attendance</th>
                 <th scope="col">Classes</th>
+                <th scope="col">Groups</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -88,12 +108,13 @@ const StudentScreen = () => {
             <tbody>
               {students.map((student) => (
                 <tr key={student._id} className="fs-4">
-                  <td>{student._id}</td>
+                  {/* <td>{student._id}</td> */}
                   <td>{student.name}</td>
                   <td>{student.email}</td>
                   <td>{student.phone}</td>
                   <td>{student.attendance}</td>
                   <td>{student.selectedClass}</td>
+                  <td>{student.selectedGroup}</td>
                   <td>
                     <button
                       className="appButton"
