@@ -73,7 +73,7 @@ const Booking = () => {
       setEmail("");
       setMassage("");
       setPhone("");
-      setFormError(null);
+      setFormError({});
     } else {
       // If there are errors, display them
       setFormError(errors);
