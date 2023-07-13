@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+
+import Loader from "../../utilities/Loader";
 import useHttp from "../../hooks/useHttp";
 import "./Booking.css";
 const minDate = new Date().toISOString().split("T")[0];
@@ -64,13 +66,14 @@ const Booking = () => {
         url: "https://darwich.onrender.com/api/bookings",
         body: bookingObject,
       });
-      console.log(response);
+
       setResponse(response.data.message);
       setName("");
       setDate("");
       setEmail("");
       setMassage("");
       setPhone("");
+      setFormError(null);
     } else {
       // If there are errors, display them
       setFormError(errors);
@@ -152,7 +155,7 @@ const Booking = () => {
       <button type="submit" className="form-button" onClick={bookingHandler}>
         Book a Trial
       </button>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader />}
     </form>
   );
 };
