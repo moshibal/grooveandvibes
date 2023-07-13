@@ -76,6 +76,21 @@ const Booking = () => {
       setFormError(errors);
     }
   };
+  //date handler
+  const dateHandler = (e) => {
+    const selectedDate = new Date(e.target.value);
+    const dayOfWeek = selectedDate.getDay(); // Sunday: 0, Monday: 1, ..., Saturday: 6
+
+    // Check if the selected day is either Thursday (4) or Saturday (6)
+    if (dayOfWeek === 4 || dayOfWeek === 6) {
+      setDate(e.target.value);
+    } else {
+      // If the selected day is not Thursday or Saturday, reset the date to an empty string
+      setDate("");
+      alert("Please choose either Thursday or Saturday for the trial class.");
+    }
+  };
+
   return (
     <form id="booking">
       <h2>Make A Booking For Next Available Class</h2>
@@ -120,9 +135,7 @@ const Booking = () => {
           type="date"
           id="date"
           value={date}
-          onChange={(e) => {
-            setDate(e.target.value);
-          }}
+          onChange={dateHandler}
         />
         {formError.date && <span className="error">{formError.date}</span>}
       </div>
