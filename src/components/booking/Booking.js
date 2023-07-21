@@ -43,22 +43,16 @@ const Booking = () => {
     }
     if (!date) {
       errors.date = "Date is required";
-    } else {
-      const selectedDate = new Date(date);
-      const currentDate = new Date();
-      if (selectedDate < currentDate) {
-        errors.date = "Selected date is in the past";
-      }
     }
 
     if (Object.keys(errors).length === 0) {
       // If there are no errors, submit the form
-
+      const hourlyDate = new Date().toISOString().split("T")[1];
       const bookingObject = {
         name,
         email,
         phone,
-        date,
+        date: `${date}T${hourlyDate}`,
         message,
       };
 
