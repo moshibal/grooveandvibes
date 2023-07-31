@@ -24,7 +24,7 @@ const Gallery = () => {
           <img src="/images/carosol3.png" alt="" />
         </div>
         <div className="project" id="cube">
-          <img src="/images/Adult.JPG" alt="" />
+          <img src="/images/adult.JPG" alt="" />
         </div>
         <div className="project" id="astro">
           <img src="/images/children.JPG" alt="" />
