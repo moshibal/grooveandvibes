@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../utilities/Loader";
 import useHttp from "../../hooks/useHttp";
 import "./Booking.css";
+import { Helmet } from "react-helmet-async";
 const minDate = new Date().toISOString().split("T")[0];
 const Booking = () => {
   const { isLoading, error, sendHttp, setError } = useHttp();
@@ -89,68 +90,78 @@ const Booking = () => {
   };
 
   return (
-    <form id="booking">
-      <h2>Make A Booking For Next Available Class</h2>
-      {error && <p className="error">{error}</p>}
-      {response && <p className="success">{response}</p>}
-      <div>
-        <label htmlFor="fullname">Full Name</label>
-        <input
-          type="input"
-          id="fullname"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        {formError.name && <span className="error">{formError.name}</span>}
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="input"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {formError.email && <span className="error">{formError.email}</span>}
-      </div>
-      <div>
-        <label htmlFor="phone">Phone</label>
-        <input
-          type="input"
-          id="phone"
-          value={phone}
-          onChange={(e) => {
-            setPhone(e.target.value);
-          }}
-        />
-        {formError.phone && <span className="error">{formError.phone}</span>}
-      </div>
-      <div>
-        <label htmlFor="date">Choose Date</label>
-        <input
-          min={minDate}
-          type="date"
-          id="date"
-          value={date}
-          onChange={dateHandler}
-        />
-        {formError.date && <span className="error">{formError.date}</span>}
-      </div>
-      <div>
-        <label>Add message</label>
-        <textarea
-          value={message}
-          onChange={(e) => {
-            setMassage(e.target.value);
-          }}
-        ></textarea>
-      </div>
+    <>
+      <Helmet>
+        <title>Book For the Trial class at Grooveandvibes</title>
+        <meta
+          name="description"
+          content="Book For the Trial class at Grooveandvibes dance school. Bollywood, HipHop, and Nepali dance traning."
+        ></meta>
+        <link rel="canonical" href="/booking" />
+      </Helmet>
+      <form id="booking">
+        <h2>Make A Booking For Next Available Class</h2>
+        {error && <p className="error">{error}</p>}
+        {response && <p className="success">{response}</p>}
+        <div>
+          <label htmlFor="fullname">Full Name</label>
+          <input
+            type="input"
+            id="fullname"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          {formError.name && <span className="error">{formError.name}</span>}
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="input"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {formError.email && <span className="error">{formError.email}</span>}
+        </div>
+        <div>
+          <label htmlFor="phone">Phone</label>
+          <input
+            type="input"
+            id="phone"
+            value={phone}
+            onChange={(e) => {
+              setPhone(e.target.value);
+            }}
+          />
+          {formError.phone && <span className="error">{formError.phone}</span>}
+        </div>
+        <div>
+          <label htmlFor="date">Choose Date</label>
+          <input
+            min={minDate}
+            type="date"
+            id="date"
+            value={date}
+            onChange={dateHandler}
+          />
+          {formError.date && <span className="error">{formError.date}</span>}
+        </div>
+        <div>
+          <label>Add message</label>
+          <textarea
+            value={message}
+            onChange={(e) => {
+              setMassage(e.target.value);
+            }}
+          ></textarea>
+        </div>
 
-      <button type="submit" className="form-button" onClick={bookingHandler}>
-        Book a Trial
-      </button>
-      {isLoading && <Loader />}
-    </form>
+        <button type="submit" className="form-button" onClick={bookingHandler}>
+          Book a Trial
+        </button>
+        {isLoading && <Loader />}
+      </form>
+    </>
   );
 };
 
