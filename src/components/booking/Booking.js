@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../utilities/Loader";
 import useHttp from "../../hooks/useHttp";
 import "./Booking.css";
-import { Helmet } from "react-helmet-async";
 const minDate = new Date().toISOString().split("T")[0];
 const Booking = () => {
   const { isLoading, error, sendHttp, setError } = useHttp();
@@ -91,14 +90,6 @@ const Booking = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Book For the Trial class at Grooveandvibes</title>
-        <meta
-          name="description"
-          content="Book For the Trial class at Grooveandvibes dance school. Bollywood, HipHop, and Nepali dance traning."
-        ></meta>
-        <link rel="canonical" href="/booking" />
-      </Helmet>
       <form id="booking">
         <h2>Make A Booking For Next Available Class</h2>
         {error && <p className="error">{error}</p>}

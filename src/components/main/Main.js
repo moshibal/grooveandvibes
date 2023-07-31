@@ -9,7 +9,6 @@ const Main = () => {
         Let your body feel the beat and express your soul - Groove&Vibe Dance
         School.
       </h1>
-
       <Carousel />
     </div>
   );

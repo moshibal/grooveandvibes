@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import "./Price.css";
 import { priceList } from "./pricelist";
+import { Helmet } from "react-helmet-async";
 
 const Price = () => {
   return (
