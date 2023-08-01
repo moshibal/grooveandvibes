@@ -6,7 +6,7 @@ const Footer = () => {
     <footer>
       <div className="imageContainer">
         <img
-          src="/images/logo-big.JPG
+          src="/images/logo-big.png
         "
           alt="footer logo"
         ></img>

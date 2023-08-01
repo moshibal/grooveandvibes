@@ -18,25 +18,25 @@ const Gallery = () => {
           <img src="/images/carosol1.png" alt="" />
         </div>
         <div className="project" id="alphabet">
-          <img src="/images/carosol2.JPG" alt="" />
+          <img src="/images/carosol2.png" alt="" />
         </div>
         <div className="project" id="traveler">
           <img src="/images/carosol3.png" alt="" />
         </div>
         <div className="project" id="cube">
-          <img src="/images/adult.JPG" alt="" />
+          <img src="/images/adult.png" alt="" />
         </div>
         <div className="project" id="astro">
-          <img src="/images/children.JPG" alt="" />
+          <img src="/images/children.png" alt="" />
         </div>
         <div className="project" id="cup">
-          <img src="/images/govinda.JPG" alt="" />
+          <img src="/images/govinda.png" alt="" />
         </div>
         <div className="project" id="insta">
-          <img src="/images/group2.JPG" alt="" />
+          <img src="/images/group2.png" alt="" />
         </div>
         <div className="project" id="foam">
-          <img src="/images/group.JPG" alt="" />
+          <img src="/images/group.png" alt="" />
         </div>
       </div>
     </div>
