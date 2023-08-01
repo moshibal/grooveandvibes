@@ -39,7 +39,7 @@ const Carousel = () => {
           </div>
           <div className="carousel-item" data-bs-interval="2000">
             <div className="imgContainer">
-              <img src="/images/carosol2.JPG" alt="..." />
+              <img src="/images/carosol2.png" alt="..." />
             </div>
           </div>
           <div className="carousel-item">
