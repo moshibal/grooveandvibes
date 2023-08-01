@@ -46,7 +46,6 @@ const Footer = () => {
       </div>
       <div>
         <p className="location">101/491 princes highway, Rockdale NSW</p>
-
         <div className="copyright">
           <span>copyright</span>
           <span>{new Date().getFullYear()}</span>
