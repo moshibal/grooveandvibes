@@ -28,12 +28,32 @@ button:hover {
 input + p {
   color: orangered;
 }
+.control-group {
+  text-align: left;
+  width: 100%;
+  position: relative;
+}
+i {
+  position: absolute;
+  top: 5rem;
+  right: 25rem;
+}
+.fa,
+.fa-eye,
+.fa-eye-slash {
+  font-size: 20px; /* Adjust the value as needed */
+}
+
 @media only screen and (max-width: 768px) {
   .form {
     width: 80vw;
   }
   .control-group {
     width: 100%;
+  }
+  i {
+    top: 5rem;
+    right: 1.7rem;
   }
   .control-group input {
     width: 100%;

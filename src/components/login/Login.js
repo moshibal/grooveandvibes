@@ -5,15 +5,19 @@ import { login } from "../../store/loginSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import Message from "../../utilities/Message";
+import Loader from "../../utilities/Loader";
 
 function Form() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailCheck, setEmailCheck] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //global state
-  const { userInfo, errorLoginMessage } = useSelector((state) => state.login);
+  const { userInfo, errorLoginMessage, loading } = useSelector(
+    (state) => state.login
+  );
   //effects
   useEffect(() => {
     let timeoutId = null;
@@ -38,6 +42,11 @@ function Form() {
       setPassword("");
     }
   };
+  //toggle password
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <form className="form">
       <div className="form-div">
@@ -68,16 +77,24 @@ function Form() {
           <label htmlFor="password">Password</label>
           <input
             required
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <i
+            className={showPassword ? "fa fa-eye" : "fa fa-eye-slash"}
+            onClick={togglePassword}
+          />
         </div>
-        <button className="formButton" onClick={loginHandler}>
-          Log In
-        </button>
+        {loading ? (
+          <Loader />
+        ) : (
+          <button className="formButton" onClick={loginHandler}>
+            Log In
+          </button>
+        )}
       </div>
     </form>
   );
