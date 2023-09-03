@@ -36,26 +36,10 @@ input + p {
 i {
   position: absolute;
   top: 5rem;
-  right: 25rem;
+  right: 2rem;
 }
 .fa,
 .fa-eye,
 .fa-eye-slash {
   font-size: 20px; /* Adjust the value as needed */
-}
-
-@media only screen and (min-width: 500px) {
-  .form {
-    width: 80vw;
-  }
-  .control-group {
-    width: 100%;
-  }
-  i {
-    top: 5rem;
-    right: 1.7rem;
-  }
-  .control-group input {
-    width: 100%;
-  }
 }
