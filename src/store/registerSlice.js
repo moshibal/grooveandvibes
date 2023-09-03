@@ -30,11 +30,11 @@ export const register = (registerObj) => {
 
       const { token } = getState().login.userInfo.data;
       axios.defaults.headers.common["authorization"] = `Bearer ${token}`;
-      const { data } = await axios.post(
+      await axios.post(
         "https://darwich.onrender.com/api/vibeRigistration",
         registerObj
       );
-      console.log(data);
+
       dispatch(registerSuccess(true));
     } catch (error) {
       dispatch(

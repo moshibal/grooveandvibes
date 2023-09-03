@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import Loader from "../../utilities/Loader";
 import useHttp from "../../hooks/useHttp";
 import "./Booking.css";
+import ModalComponent from "../../utilities/Modal";
 const minDate = new Date().toISOString().split("T")[0];
+
 const Booking = () => {
   const { isLoading, error, sendHttp, setError } = useHttp();
   const [response, setResponse] = useState(null);
@@ -11,8 +12,11 @@ const Booking = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMassage] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
   const [formError, setFormError] = useState({});
+  const [selectedClass, setSelectedClass] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState("");
+  const [isErrorModalOpen, setErrorModalOpen] = useState(false);
   //cleaning the component after the response message
   useEffect(() => {
     setTimeout(() => {
@@ -44,6 +48,12 @@ const Booking = () => {
     if (!date) {
       errors.date = "Date is required";
     }
+    if (!selectedClass) {
+      errors.selectedClass = "please select the available class group";
+    }
+    if (!selectedGroup) {
+      errors.selectedGroup = "please select the group";
+    }
 
     if (Object.keys(errors).length === 0) {
       // If there are no errors, submit the form
@@ -54,6 +64,8 @@ const Booking = () => {
         phone,
         date: `${date}T${hourlyDate}`,
         message,
+        selectedClass,
+        selectedGroup,
       };
 
       const response = await sendHttp({
@@ -68,6 +80,8 @@ const Booking = () => {
       setMassage("");
       setPhone("");
       setFormError({});
+      setSelectedClass("");
+      setSelectedGroup("");
     } else {
       // If there are errors, display them
       setFormError(errors);
@@ -83,15 +97,15 @@ const Booking = () => {
       setDate(e.target.value);
     } else {
       // If the selected day is not Thursday or Saturday, reset the date to an empty string
+      setErrorModalOpen(true);
       setDate("");
-      alert("Please choose either Thursday or Saturday for the trial class.");
     }
   };
 
   return (
     <>
       <form id="booking">
-        <h2>Make A Booking For Next Available Class</h2>
+        <h2>Register For Next Available Class</h2>
         {error && <p className="error">{error}</p>}
         {response && <p className="success">{response}</p>}
         <div>
@@ -126,20 +140,63 @@ const Booking = () => {
           />
           {formError.phone && <span className="error">{formError.phone}</span>}
         </div>
+        <div className="groupContainer">
+          <div>
+            <label htmlFor="class">Class:</label>
+            <select
+              id="class"
+              value={selectedClass}
+              onChange={(e) => setSelectedClass(e.target.value)}
+              required
+              className="nav-dropdown"
+            >
+              <option value="">Select class</option>
+              <option value="1 class">1 class</option>
+              <option value="5 class">5 classes</option>
+              <option value="10 class">10 classes</option>
+              <option value="20 class">20 classes</option>
+            </select>
+            {formError.selectedClass && (
+              <p className="error">{formError.selectedClass}</p>
+            )}
+          </div>
+          <div>
+            <label htmlFor="group">Group:</label>
+            <select
+              id="group"
+              value={selectedGroup}
+              onChange={(e) => setSelectedGroup(e.target.value)}
+              required
+              className="nav-dropdown"
+            >
+              <option value="">Select group</option>
+              <option value="kid">Kids</option>
+              <option value="adult">Adults</option>
+            </select>
+            {formError.selectedGroup && (
+              <p className="error">{formError.selectedGroup}</p>
+            )}
+          </div>
+        </div>
         <div>
           <label htmlFor="date">Choose Date</label>
           <input
             min={minDate}
             type="date"
             id="date"
-            value={date}
+            value={date ? date : minDate}
             onChange={dateHandler}
+          />
+          <ModalComponent
+            isOpen={isErrorModalOpen}
+            onRequestClose={() => setErrorModalOpen(false)}
           />
           {formError.date && <span className="error">{formError.date}</span>}
         </div>
         <div>
           <label>Add message</label>
           <textarea
+            placeholder="Optional"
             value={message}
             onChange={(e) => {
               setMassage(e.target.value);
@@ -148,7 +205,7 @@ const Booking = () => {
         </div>
 
         <button type="submit" className="form-button" onClick={bookingHandler}>
-          Book a Trial
+          Register a Class
         </button>
         {isLoading && <Loader />}
       </form>

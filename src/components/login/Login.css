@@ -20,7 +20,7 @@
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
 }
-button:hover {
+.custom-btn:hover {
   background-color: var(--purple-1);
   transition: 1s;
 }

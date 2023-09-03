@@ -91,7 +91,11 @@ function Form() {
         {loading ? (
           <Loader />
         ) : (
-          <button className="formButton" onClick={loginHandler}>
+          <button
+            className="formButton custom-btn
+          "
+            onClick={loginHandler}
+          >
             Log In
           </button>
         )}
