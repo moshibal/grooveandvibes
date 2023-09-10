@@ -9,6 +9,7 @@ const userSlice = createSlice({
     userInfo: userInfoLocalStorage,
     loading: false,
     errorLoginMessage: null,
+    errorLogOutMessage: null,
   },
   reducers: {
     loginRequest(state) {
@@ -25,7 +26,7 @@ const userSlice = createSlice({
     },
     deleteUser(state, action) {
       state.userInfo = {};
-      state.errorLoginMessage = action.payload.message;
+      state.errorLogOutMessage = action.payload.message;
     },
   },
 });
@@ -71,6 +72,7 @@ export const logout = () => {
         "https://darwich.onrender.com/api/users/logout"
       );
       if (res.status === 200) {
+        console.log("hey");
         dispatch(deleteUser());
         localStorage.setItem(
           "userInformation",
@@ -80,7 +82,7 @@ export const logout = () => {
     } catch (error) {
       dispatch(
         deleteUser({
-          message: error.response.data.message || "Something went wrong.",
+          message: error?.response?.data.message || "Something went wrong.",
         })
       );
     }

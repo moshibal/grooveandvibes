@@ -108,6 +108,15 @@
     max-width: 100%;
   }
 }
+.signOut {
+  text-decoration: none;
+  margin: 1.6rem;
+  color: black;
+  font-size: 1.5rem;
+}
+.signOut:hover {
+  text-decoration: underline;
+}
 /* keyframe animation */
 @keyframes flipBar1 {
   from {

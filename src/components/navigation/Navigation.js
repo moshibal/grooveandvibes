@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navigation.css";
 import { toggleHamburger } from "./index.js";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../store/loginSlice";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.login);
   const [selectedOption, setSelectedOption] = useState("");
@@ -43,10 +45,23 @@ const Navigation = () => {
           <img src="/images/logo.png" alt="logo"></img>
         </div>
         <div className="right">
+          {userInfo?.data?.isAdmin ? (
+            <Link
+              className="signOut"
+              to="#"
+              onClick={() => {
+                dispatch(logout());
+              }}
+            >
+              Logout
+            </Link>
+          ) : (
+            <a href="tel:0433756731">Contact</a>
+          )}
           <Link to="#" onClick={handleScrollToBooking}>
             Booking
           </Link>
-          <a href="tel:0433756731">Contact</a>
+
           {userInfo?.data?.isAdmin ? (
             <select
               className="nav-dropdown"
@@ -61,20 +76,24 @@ const Navigation = () => {
           ) : (
             <Link to="/login">Admin</Link>
           )}
-          <Link
-            to="https://www.tiktok.com/@grooveandvibes"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src="/images/tiktok.png" alt="tiktok" />
-          </Link>
-          <Link
-            to="https://www.instagram.com/groove_and_vibes/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src="/images/insta_icon.png" alt="instagram" />
-          </Link>
+          {!userInfo?.data?.isAdmin && (
+            <>
+              <Link
+                to="https://www.tiktok.com/@grooveandvibes"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/images/tiktok.png" alt="tiktok" />
+              </Link>
+              <Link
+                to="https://www.instagram.com/groove_and_vibes/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="/images/insta_icon.png" alt="instagram" />
+              </Link>
+            </>
+          )}
         </div>
         <div className="hamburger" onClick={toggleHamburger}>
           <div className="bar1"></div>
@@ -83,7 +102,19 @@ const Navigation = () => {
         </div>
       </header>
       <nav className="mobileNav">
-        <a href="tel:0433756731">Contact</a>
+        {userInfo?.data?.isAdmin ? (
+          <Link
+            className="signOut"
+            to="#"
+            onClick={() => {
+              dispatch(logout());
+            }}
+          >
+            Logout
+          </Link>
+        ) : (
+          <a href="tel:0433756731">Contact</a>
+        )}
         <Link to="#" onClick={handleScrollToBooking}>
           Booking
         </Link>
@@ -101,20 +132,24 @@ const Navigation = () => {
         ) : (
           <Link to="/login">Admin</Link>
         )}
-        <Link
-          to="https://www.tiktok.com/@grooveandvibes"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src="/images/tiktok.png" alt="tiktok" />
-        </Link>
-        <Link
-          to="https://www.instagram.com/groove_and_vibes/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src="/images/insta_icon.png" alt="instagram" />
-        </Link>
+        {!userInfo?.data?.isAdmin && (
+          <>
+            <Link
+              to="https://www.tiktok.com/@grooveandvibes"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="/images/tiktok.png" alt="tiktok" />
+            </Link>
+            <Link
+              to="https://www.instagram.com/groove_and_vibes/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="/images/insta_icon.png" alt="instagram" />
+            </Link>
+          </>
+        )}
       </nav>
     </>
   );
