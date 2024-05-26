@@ -1,9 +1,10 @@
 export const priceList = [
   {
     name: "Adult Class",
-    fiveClasses: 85,
-    tenClasses: 160,
-    twentyClasses: 300,
+    casual: 20,
+    fiveClasses: 90,
+    tenClasses: 180,
+    twentyClasses: 350,
     imageUrl: "/images/adult.png",
   },
   {
@@ -15,8 +16,8 @@ export const priceList = [
   },
   {
     name: "Individual Class",
-    oneDay: 50,
-    fiveClasses: 200,
+    oneDay: 65,
+    fiveClasses: 300,
     imageUrl: "/images/adult.png",
   },
 ];

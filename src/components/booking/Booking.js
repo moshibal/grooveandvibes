@@ -93,7 +93,13 @@ const Booking = () => {
     const dayOfWeek = selectedDate.getDay(); // Sunday: 0, Monday: 1, ..., Saturday: 6
 
     // Check if the selected day is either Thursday (4) or Saturday (6)
-    if (dayOfWeek === 4 || dayOfWeek === 6) {
+    if (
+      dayOfWeek === 4 ||
+      dayOfWeek === 6 ||
+      dayOfWeek === 0 ||
+      dayOfWeek === 3 ||
+      dayOfWeek === 2
+    ) {
       setDate(e.target.value);
     } else {
       // If the selected day is not Thursday or Saturday, reset the date to an empty string

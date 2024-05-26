@@ -14,7 +14,10 @@ const ModalComponent = ({ isOpen, onRequestClose }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
       <h2>Error</h2>
-      <p>Please choose either Thursday or Saturday for the first class.</p>
+      <p>
+        Unavailable to book on this day for the first class, Please choose some
+        other days for booking, thank you😊.
+      </p>
       <button
         onClick={onRequestClose}
         style={{ padding: "3px", width: "6rem" }}

@@ -9,6 +9,7 @@ const Card = ({ price }) => {
       </div>
       <div className="cardTextContain">
         <h2>{price.name}</h2>
+        {price.casual && <p>${price.casual} for a casual class</p>}
         {price.oneDay && <p>${price.oneDay} for a day</p>}
         {price.fiveClasses && <p>${price.fiveClasses} for 5 Classes</p>}
         {price.tenClasses && <p>${price.tenClasses} for 10 Classes</p>}
